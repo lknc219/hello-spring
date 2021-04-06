@@ -32,7 +32,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
     @Override
     public Member save(Member member) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
+        jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id"); //대신 insert문을 만들어줌
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", member.getName());
@@ -44,21 +44,22 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findById(Long id) {
-        List<Member> result = jdbcTemplate.query("select * from member where id = ?", memberRowMapper());
+        List<Member> result = jdbcTemplate.query("select * from member where id = ?", memberRowMapper(),id);
         return result.stream().findAny();
     }
 
     @Override
     public Optional<Member> findByName(String name) {
-        return Optional.empty();
+        List<Member> result = jdbcTemplate.query("select * from member where name = ?", memberRowMapper(),name);
+        return result.stream().findAny();
     }
 
     @Override
     public List<Member> findAll() {
-        return null;
+        return jdbcTemplate.query("select * from member", memberRowMapper());
     }
 
-    private  RowMapper<Member> memberRowMapper(){
+    private  RowMapper<Member> memberRowMapper(){ //RowMapper를 통해 맵핑한다.
         return (rs, rowNum) -> {
             Member member = new Member();
             member.setId(rs.getLong("id"));
