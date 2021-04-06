@@ -13,9 +13,9 @@ import java.util.Optional;
 
 
 
-/*        순수 Jdbc와 동일한 환경설정을 하면 된다.
+/*      순수 Jdbc와 동일한 환경설정을 하면 된다.
         스프링 JdbcTemplate과 MyBatis 같은 라이브러리는 JDBC API에서 본 반복 코드를 대부분
-        제거해준다. 하지만 SQL은 직접 작생해야 한다*/
+        제거해준다. 하지만 SQL은 직접 작성해야 한다*/
 public class JdbcTemplateMemberRepository implements MemberRepository{
 
     private final JdbcTemplate jdbcTemplate; //

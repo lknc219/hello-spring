@@ -6,6 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+//순수 JdbcDataSource
+
 public class JdbcMemberRepository implements MemberRepository {
     private final DataSource dataSource;
     public JdbcMemberRepository(DataSource dataSource) {
