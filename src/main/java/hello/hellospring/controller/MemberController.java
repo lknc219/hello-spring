@@ -17,6 +17,7 @@ public class MemberController {
     @Autowired //의존관계 주입 Dependencies Injection
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+        System.out.println("memberService = "+memberService.getClass());
     }
 
     @GetMapping("members/new")
